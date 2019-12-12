@@ -1,0 +1,64 @@
+ortal.netzer, yair_shemer
+ortal glatt, yair shemer
+
+=============================
+=  README for ex6:   =
+=============================
+
+
+==================
+=  Description:  =
+==================
+In this exercise, we built a wave editor program.
+This program can edit an existed file, merge two existed files to one new file
+and create an audio file following an instructions file (txt).
+The user can do more then one action in every operation, and at the end he can
+save the audio as a new file.
+
+The functions in ex5:
+
+* "main" - Give the user the main menu with 4 options - change file, merge 2
+files, make a composition amd go out of the program.
+* "change_file" - If the user chose to change a file, this function ask him to
+input the name of the file. If the file is valid, the function
+"change_checked_file" ask the user what change does he want to make, every
+action the user choose move to another function that return the audio_data
+after the change.
+  The change menu functions:
+  1. "reverse" - Reverse the audio data list.
+  2. "higher_speed" - Create a list that contains only the sublists that appear
+  in the original list in even indexes.
+  3. "lower_speed" - Create a new list that contains the same sublists, and
+  between every two, the function add the average between them.
+  4. "higher_volume" - Multiply all the numbers in the sublists by 1.2.
+  The function "volume_fix" change the number to the maximum volume if it's
+  bigger than it or to the minimum volume if ot's lower than it.
+  5. "lower volume" - Divide all the numbers in the sublists by 1.2.
+  6. "low_pass_filter" - By using the function "mid_sublists_filter" every
+  sublist changes to the average sublist of the sublist and the two sublists
+  near it.
+  - Some of those functions use the function "average_list" that get a lists of
+  sublists and create their average sublist.
+* "merge_files" - If the user chose to merge files, this function ask him to
+input the name of the files and check if the files are valid. It calculate the
+gcd between the to sample rates.
+This function use the following:
+  - "create_new_list" - Find which wave file has the bigger sample rate, and by
+  using the function "list_after_gcd" that cuts off the indexes in the audio
+  data of the wave with the bigger sample rate list that should not be there.
+  If the files has the same sample rate, the audio data lists stays the same.
+  - "merge_lists" - Merge the new list with the other wave file list and create
+  a new audio data list.
+* "composition" - If the user chose to make a composition, this function ask
+him to input the name of the composition instructions text file. The function
+create an audio file by following the instructions.
+This function use the following:
+  - "string_to_compo_list" - Takes the string of the text in the file and make
+  a list of sublists that contain the letter (score) and the amount of samples.
+  - "compo_sublist" - analyses the sublist with the letter and amount of
+  samples and creates a list that should be added to the main audio data list.
+  This function uses the function "sample_value" that calculate the sample
+  value for every index in the main audio data list.
+* "transit_menu" - After every change to the given or created file, this menu
+will ask if the user wants to save, and then go to main menu, or keep changing
+the file.
